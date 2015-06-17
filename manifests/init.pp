@@ -21,6 +21,7 @@
 class winnetdrive (
   $sd_host     = hiera('sd_host'),
   $sd_domain   = hiera('sd_domain'),
+  $sd_alias    = hiera('sd_alias'),
   $sd_path     = hiera('sd_path'),
   $sd_username = hiera('sd_username'),
   $sd_userpwd  = hiera('sd_userpwd')

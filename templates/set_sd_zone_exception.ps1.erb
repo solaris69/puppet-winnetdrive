@@ -1,4 +1,7 @@
 $key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains\<%= @sd_domain %>\<%= @sd_host %>'
 New-Item -Path $key -force
 Set-ItemProperty -Path $key -Name file -Value 1 -ErrorAction SilentlyContinue
+$key2 = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains\<%= @sd_alias %>'
+New-Item -Path $key2 -force
+Set-ItemProperty -Path $key2 -Name file -Value 1 -ErrorAction SilentlyContinue
 exit 0
