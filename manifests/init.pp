@@ -36,9 +36,9 @@ class winnetdrive (
       }
 
       ## Enable moderate risk files types inclusion (exe,bat,cmd)
-      file { 'C:/Windows/System32/GroupPolicy':
+      file { 'C:/Windows/System32/GroupPolicy/User':
         ensure             => directory,
-        source             => 'puppet:///modules/winnetdrive/gpo',
+        source             => 'puppet:///modules/winnetdrive/gpo/User',
         recurse            => remote,
         source_permissions => ignore,
       }
