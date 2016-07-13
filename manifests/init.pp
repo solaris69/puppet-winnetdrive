@@ -28,11 +28,14 @@ class winnetdrive (
   case $::osfamily {
     'windows': {
       ## Add shared drive host to Windows zone security
+      file { 'c:/vc': ensure => directory } ->
+      file{ 'c:/vc/set_sd_zone_exception.ps1': ensure => file, content => template('winnetdrive/set_sd_zone_exception.ps1.erb')} ->
+      file{ 'c:/vc/check_sd_zone_exception.ps1': ensure => file, content => template('winnetdrive/check_sd_zone_exception.ps1.erb')} ->
       exec { 'add shared drive to zone security':
-        path     => $::path,
-        command  => template('winnetdrive/set_sd_zone_exception.ps1.erb'),
-        unless   => template('winnetdrive/check_sd_zone_exception.ps1.erb'),
-        provider => powershell,
+#        path     => $::path,
+        command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Executionpolicy Unrestricted -File c:/vc/set_sd_zone_exception.ps1',
+        unless   => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Executionpolicy Unrestricted -File c:/vc/check_sd_zone_exception.ps1',
+#        provider => powershell,
       }
 
       ## Enable moderate risk files types inclusion (exe,bat,cmd)
